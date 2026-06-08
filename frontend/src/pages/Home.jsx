@@ -64,7 +64,7 @@ function Home() {
               alt="AS Collections Logo" 
               className="img-fluid shadow-lg animate-hover"
               style={{ 
-               width: '100%',
+          width: '100%',
           maxWidth: '400px', 
           height: 'auto',
           aspectRatio: '1 / 1', 
@@ -80,6 +80,9 @@ function Home() {
           
           {/* Right Column - Text & Details */}
           <div className="col-12 col-lg-6 ps-lg-5 text-start">
+            {/* <span className="badge bg-success mb-2 px-3 py-2 fs-6 rounded-pill" style={{ backgroundColor: 'var(--primary-green) !important' }}>
+              🌿 100% Organic & Natural Products
+            </span> */}
             <span 
         className="badge bg-success mb-3 px-3 py-2 fs-6 rounded-pill d-inline-block text-wrap" 
         style={{ 
@@ -172,7 +175,7 @@ function Home() {
           <div className="col-12 col-md-8">
             <h2 className="fw-bold mb-3">About AS Collections</h2>
             <p className="text-muted" style={{ lineHeight: '1.7' }}>
-              At AS Collections, we believe in the restorative powers of Mother Nature. Located in Salem, Tamil Nadu, we specialize in producing 100% chemical-free, natural soaps, oils, and nutritional powders. Every product is handcrafted with care using hand-picked herbs and oils, ensuring that your skin glows naturally and shines beautifully. Thank you for supporting our organic handmade journey!
+              At AS Collections, we believe in the restorative powers of Mother Nature. Located in Tamil Nadu, we specialize in producing 100% chemical-free, natural soaps, oils, and nutritional powders. Every product is handcrafted with care using hand-picked herbs and oils, ensuring that your skin glows naturally and shines beautifully. Thank you for supporting our organic handmade journey!
             </p>
           </div>
           <div className="col-12 col-md-4 text-center mt-3 mt-md-0">
