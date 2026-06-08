@@ -96,7 +96,6 @@ function Home() {
             </p>
             
             <div className="d-flex flex-wrap gap-2 mt-2">
-              <span className="detail-tag" style={{ backgroundColor: 'rgba(45, 80, 22, 0.1)', color: 'var(--primary-green)' }}>📍 Salem, Tamil Nadu</span>
               <span className="detail-tag" style={{ backgroundColor: 'rgba(45, 80, 22, 0.1)', color: 'var(--primary-green)' }}>📞 +91 7395 832 383</span>
               <span className="detail-tag" style={{ backgroundColor: 'rgba(45, 80, 22, 0.1)', color: 'var(--primary-green)' }}>🚚 India-Wide Shipping</span>
             </div>
