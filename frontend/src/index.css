@@ -1,0 +1,404 @@
+/* AS Collections CSS Theme & Core Layout Tokens */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Nunito:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap');
+
+body{
+   background-image: url('./assets/images/backgroundimages.jpg');
+     margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+:root {
+  --primary-green: #2D5016; /* Deep forest green */
+  --sage-green: #7A9E3B;    /* Sage green */
+  --warm-beige: #F5E6C8;    /* Warm beige */
+  --cream: #FDF6E3;         /* Cream */
+  --earth-brown: #8B6914;   /* Earthy brown/gold */
+  --text-dark: #2d3748;
+  --text-muted: #5c6873;
+  --glass-bg: rgba(253, 246, 227, 0.85); /* Semi-transparent cream tint */
+  --glass-border: rgba(45, 80, 22, 0.12);
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Base style resets & background layers */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  color: var(--text-dark);
+  scroll-behavior: smooth;
+  background-color: var(--cream);
+  overflow-x: hidden;
+}
+
+/* Parallax natural background atmosphere */
+.nature-atmosphere {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-layer-canopy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(180deg, rgba(45, 80, 22, 0.25) 0%, rgba(253, 246, 227, 0.95) 100%),
+                    url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  transform: translate3d(0, 0, 0);
+  filter: blur(2px) contrast(0.95);
+}
+
+/* Drifting mist/fog animation */
+.fog-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.25;
+  background-image: url('https://pngimg.com/uploads/fog/fog_PNG24.png');
+  background-repeat: repeat-x;
+  background-size: 200% auto;
+  animation: driftFog 60s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes driftFog {
+  0% { background-position: 0 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Floating pollen / Fireflies animation */
+.pollen-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 1) 0%, rgba(251, 191, 36, 0.2) 70%);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+  pointer-events: none;
+  animation: floatPollen 15s infinite linear;
+}
+
+@keyframes floatPollen {
+  0% { transform: translateY(100vh) translateX(0) scale(0.6); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-10vh) translateX(60px) scale(1.2); opacity: 0; }
+}
+
+/* Falling leaves */
+.leaves-container {
+  position: fixed;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.falling-leaf {
+  position: absolute;
+  display: block;
+  fill: var(--sage-green);
+  opacity: 0.65;
+  filter: drop-shadow(0 2px 4px rgba(45, 80, 22, 0.15));
+  animation: leafFall 12s linear infinite, leafSway 4s ease-in-out infinite alternate;
+}
+
+@keyframes leafFall {
+  0% { top: -10%; transform: rotate(0deg); }
+  100% { top: 110%; transform: rotate(360deg); }
+}
+
+@keyframes leafSway {
+  0% { margin-left: 0px; }
+  100% { margin-left: 80px; }
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6, .brand-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--primary-green) !important;
+}
+
+.tagline-font {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--earth-brown);
+}
+
+/* Section divider with Leaf SVG */
+.leaf-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+  color: var(--sage-green);
+}
+.leaf-divider::before, .leaf-divider::after {
+  content: "";
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(122,158,59,0) 0%, rgba(122,158,59,0.4) 50%, rgba(122,158,59,0) 100%);
+}
+
+/* Glassmorphism panels */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px) saturate(110%);
+  -webkit-backdrop-filter: blur(12px) saturate(110%);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(45, 80, 22, 0.08);
+  padding: 3rem;
+  transition: var(--transition-smooth);
+}
+.glass-panel:hover {
+  box-shadow: 0 20px 45px rgba(45, 80, 22, 0.12);
+}
+
+/* Flat Product Cards with Greenish Hover Glow */
+.product-static-card {
+  background: var(--cream);
+  border-radius: 20px;
+  border: 1.5px solid var(--glass-border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: var(--transition-smooth);
+  position: relative;
+  background-image: radial-gradient(rgba(139, 105, 20, 0.02) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+.product-static-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(45, 80, 22, 0.22);
+  border-color: var(--primary-green);
+}
+
+/* Leaf Particle Blast Animation */
+.leaf-blast-particle {
+  position: absolute;
+  pointer-events: none;
+  width: 15px;
+  height: 15px;
+  opacity: 1;
+  animation: leafBlastAnim 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  z-index: 9999;
+}
+
+.leaf-blast-particle.color-1 { fill: var(--sage-green); }
+.leaf-blast-particle.color-2 { fill: var(--primary-green); }
+.leaf-blast-particle.color-3 { fill: var(--earth-brown); }
+
+@keyframes leafBlastAnim {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(0.3) rotate(var(--tr));
+    opacity: 0;
+  }
+}
+
+/* Overlay & Labels */
+.brand-label-overlay {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(45, 80, 22, 0.85);
+  color: var(--cream);
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-transform: uppercase;
+}
+
+.adult-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #dc3545;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.blurred-image {
+  filter: blur(15px);
+  transform: scale(1.05);
+}
+
+/* Buttons */
+.btn-custom {
+  background-color: var(--primary-green) !important;
+  color: var(--cream) !important;
+  font-weight: 700 !important;
+  border-radius: 30px !important;
+  padding: 10px 24px !important;
+  border: 1px solid var(--primary-green) !important;
+  transition: var(--transition-smooth) !important;
+}
+.btn-custom:hover {
+  background-color: var(--sage-green) !important;
+  border-color: var(--sage-green) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(122, 158, 59, 0.3);
+}
+
+.btn-secondary-custom {
+  background-color: transparent !important;
+  color: var(--primary-green) !important;
+  font-weight: 700 !important;
+  border-radius: 30px !important;
+  padding: 10px 24px !important;
+  border: 2px solid var(--primary-green) !important;
+  transition: var(--transition-smooth) !important;
+}
+.btn-secondary-custom:hover {
+  background-color: var(--primary-green) !important;
+  color: var(--cream) !important;
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+  background-color: #25D366 !important;
+  color: #fff !important;
+  border-color: #25D366 !important;
+}
+.btn-whatsapp:hover {
+  background-color: #128C7E !important;
+  border-color: #128C7E !important;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+/* Interactive elements */
+.pulse-icon {
+  animation: pulseBtn 2s infinite;
+}
+
+@keyframes pulseBtn {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Sticky WhatsApp floating button */
+.whatsapp-sticky {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #25D366;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 32px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
+  z-index: 1000;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+.whatsapp-sticky:hover {
+  background-color: #128C7E;
+  color: #fff;
+  transform: scale(1.1) rotate(10deg);
+}
+
+/* Variant selectors */
+.variant-pill {
+  border: 1.5px solid var(--primary-green);
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  background: transparent;
+  transition: var(--transition-smooth);
+}
+.variant-pill.active {
+  background: var(--primary-green);
+  color: var(--cream);
+}
+
+/* Age verification modal blur and look */
+.age-modal-bg {
+  background-color: rgba(45, 80, 22, 0.65);
+  backdrop-filter: blur(10px);
+}
+
+/* Responsive custom spacing mimicking Tailwind */
+@media (max-width: 768px) {
+  .glass-panel {
+    padding: 1.5rem;
+  }
+  .product-flip-card {
+    height: 440px;
+  }
+}
+
+/* Bounce animation */
+.bounce-click:active {
+  animation: buttonBounce 0.3s;
+}
+
+.nav-item:hover{
+  background-color: #2D5016;
+  border-radius: 10px;
+}
+
+@keyframes buttonBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* Static Star Rating (No animations, instant color response) */
+.star-rating .star-input {
+  cursor: pointer;
+  color: #cbd5e0 !important;
+  transition: none !important;
+  display: inline-block;
+}
+.star-rating .star-input.active {
+  color: #fbbf24 !important;
+  text-shadow: none !important;
+  animation: none !important;
+}
+.star-rating .star-input:hover {
+  transform: none !important;
+}
