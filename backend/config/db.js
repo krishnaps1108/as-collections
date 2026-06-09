@@ -4,8 +4,8 @@ import Product from '../models/Product.js';
 const seedDummyProducts = async () => {
   try {
     // Clear existing products to avoid duplicates during redesign seed
-    await Product.deleteMany({});
-    console.log('Cleared existing products.');
+    //await Product.deleteMany({});
+    //console.log('Cleared existing products.');
 
     console.log('Seeding AS Collections products...');
     const productsList = [
@@ -195,7 +195,7 @@ const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
-    await seedDummyProducts();
+    //await seedDummyProducts();
     await seedAdminUser();
   } catch (error) {
     console.error(`Database connection error: ${error.message}`);
