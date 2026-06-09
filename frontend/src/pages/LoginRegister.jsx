@@ -247,17 +247,7 @@ function LoginRegister() {
               />
             </div>
 
-            <div className="mb-3">
-              <label className="form-label fw-bold">Select Account Role</label>
-              <select 
-                className="form-select" 
-                value={role} 
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option value="user">Standard Customer (Buy Products)</option>
-                <option value="seller">Seller / Partner (Add & Sell Products)</option>
-              </select>
-            </div>
+
 
             <div className="row">
               <div className="col-md-6 mb-3">

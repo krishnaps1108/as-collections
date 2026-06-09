@@ -31,8 +31,8 @@ export const addProduct = async (req, res) => {
 
     // Handle file upload
     if (req.file) {
-      imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-    }
+  imageUrl = req.file.path;
+ }
 
     // Parse variants if provided as JSON string
     let parsedVariants = [];
@@ -98,9 +98,9 @@ export const updateProduct = async (req, res) => {
     let imageUrl = req.body.image;
 
     // Handle file upload
-    if (req.file) {
-      imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-    }
+   if (req.file) {
+  imageUrl = req.file.path;
+ }
 
     const updateData = {};
     if (name !== undefined) updateData.name = name;

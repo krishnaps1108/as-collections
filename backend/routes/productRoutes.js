@@ -2,23 +2,27 @@ import express from 'express';
 import { getProducts, getProductById, addProduct, updateProduct, deleteProduct } from '../controllers/productController.js';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 const router = express.Router();
 
-// Configure where to save files and what to name them
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Saves inside the backend/uploads folder
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Unique file name
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'as-collections-products',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp']
   }
 });
 
 const upload = multer({ storage });
 
-// Role check middleware: Seller or Admin
 const protectSellerOrAdmin = (req, res, next) => {
   const authHeader = req.headers.authorization;
   let token = authHeader && authHeader.split(' ')[1];
@@ -32,9 +36,7 @@ const protectSellerOrAdmin = (req, res, next) => {
     token = cookies['token'];
   }
 
-  if (!token) {
-    return res.status(401).json({ message: 'Not authorized, token missing' });
-  }
+  if (!token) return res.status(401).json({ message: 'Not authorized, token missing' });
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -44,12 +46,11 @@ const protectSellerOrAdmin = (req, res, next) => {
     req.userId = decoded.id;
     req.userRole = decoded.role;
     next();
-  } catch (error) {
+  } catch {
     res.status(401).json({ message: 'Token verification failed' });
   }
 };
 
-// Role check middleware: Admin only
 const protectAdmin = (req, res, next) => {
   const authHeader = req.headers.authorization;
   let token = authHeader && authHeader.split(' ')[1];
@@ -63,9 +64,7 @@ const protectAdmin = (req, res, next) => {
     token = cookies['token'];
   }
 
-  if (!token) {
-    return res.status(401).json({ message: 'Not authorized, token missing' });
-  }
+  if (!token) return res.status(401).json({ message: 'Not authorized, token missing' });
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -75,7 +74,7 @@ const protectAdmin = (req, res, next) => {
     req.userId = decoded.id;
     req.userRole = decoded.role;
     next();
-  } catch (error) {
+  } catch {
     res.status(401).json({ message: 'Token verification failed' });
   }
 };
