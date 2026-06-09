@@ -5,7 +5,8 @@ import connectDB from './config/db.js';
 import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
-
+import cloudinary from './config/cloudinary.js';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
@@ -21,14 +22,14 @@ if (!fs.existsSync(uploadsDir)) {
 }
 
 // Multer configuration for general uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'as-collections',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp']
   }
 });
+
 const upload = multer({ storage });
 
 // Middleware
@@ -41,8 +42,10 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
-  const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-  res.json({ imageUrl });
+
+  res.json({
+    imageUrl: req.file.path
+  });
 });
 
 // Connect to Database
