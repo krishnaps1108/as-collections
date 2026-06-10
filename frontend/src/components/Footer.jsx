@@ -24,9 +24,6 @@ function Footer() {
               <span>💚 Pure</span> | 
               <span>🧴 Chemical Free</span>
             </div>
-            <p className="m-0 text-white-50">
-              📍 Salem, Tamil Nadu, India
-            </p>
           </div>
 
           {/* Socials & Contacts */}
@@ -50,7 +47,7 @@ function Footer() {
                 href="https://www.instagram.com/as_collections_hub" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="btn btn-outline-light btn-sm rounded-pill px-3 py-1 me-2"
+                className="btn btn-outline-light btn-sm rounded-pill px-3 py-1 me-2 mb-3"
               >
                 📸 Instagram: @as_collections_hub
               </a>
