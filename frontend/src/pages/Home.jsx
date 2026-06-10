@@ -64,14 +64,15 @@ function Home() {
               alt="AS Collections Logo" 
               className="img-fluid shadow-lg animate-hover"
               style={{ 
-                width: '400px', 
-                height: '400px', 
-                borderRadius: '100%',
-                objectFit: 'cover', 
-                border: '6px solid var(--warm-beige)',
-                boxShadow: '0 15px 35px rgba(45, 80, 22, 0.18)',
-                transform: 'scale(1.06)',
-                transition: 'all 0.5s ease',
+                width: '100%',
+          maxWidth: '400px', 
+          height: 'auto',
+          aspectRatio: '1 / 1', 
+          borderRadius: '50%',
+          objectFit: 'contain',
+          border: '6px solid var(--warm-beige)',
+          boxShadow: '0 15px 35px rgba(45, 80, 22, 0.18)',
+          transform: window.innerWidth > 768 ? 'scale(1.06)' : 'none',
                 display: 'block'
               }}
             />
@@ -79,9 +80,15 @@ function Home() {
           
           {/* Right Column - Text & Details */}
           <div className="col-12 col-lg-6 ps-lg-5 text-start">
-            <span className="badge bg-success mb-2 px-3 py-2 fs-6 rounded-pill" style={{ backgroundColor: 'var(--primary-green) !important' }}>
-              🌿 100% Organic & Natural Handmade Products
-            </span>
+            <span 
+        className="badge bg-success mb-3 px-3 py-2 fs-6 rounded-pill d-inline-block text-wrap" 
+        style={{ 
+          backgroundColor: 'var(--primary-green)',
+          lineHeight: '1.4' 
+        }}
+      >
+        🌿 100% Organic & Natural Handmade Products
+      </span>
             <h1 className="display-4 fw-bold mb-2">AS Collections</h1>
             <p className="tagline-font mb-3">Skin Glowing, Nature's Touch</p>
             <p className="fs-5 text-muted mb-4 lead" style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
@@ -89,7 +96,6 @@ function Home() {
             </p>
             
             <div className="d-flex flex-wrap gap-2 mt-2">
-              <span className="detail-tag" style={{ backgroundColor: 'rgba(45, 80, 22, 0.1)', color: 'var(--primary-green)' }}>📍 Salem, Tamil Nadu</span>
               <span className="detail-tag" style={{ backgroundColor: 'rgba(45, 80, 22, 0.1)', color: 'var(--primary-green)' }}>📞 +91 7395 832 383</span>
               <span className="detail-tag" style={{ backgroundColor: 'rgba(45, 80, 22, 0.1)', color: 'var(--primary-green)' }}>🚚 India-Wide Shipping</span>
             </div>
